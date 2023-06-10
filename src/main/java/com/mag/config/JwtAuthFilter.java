@@ -16,7 +16,9 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
 
-    private final String TOKEN_PREFIX = "Bearer ";
+    private static final String TOKEN_PREFIX = "Bearer ";
+
+    private final JwtService jwtService;
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
@@ -33,7 +35,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
 
         jwt = authHeader.substring(TOKEN_PREFIX.length());
-        email = //todo extract the userEmail from JWT token
+        email = jwtService.extractEmail(jwt);
 
     }
 }
