@@ -1,4 +1,4 @@
-package com.mag.auth;
+package com.mag.authentication;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

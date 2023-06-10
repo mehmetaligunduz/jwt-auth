@@ -1,8 +1,8 @@
 package com.mag.service;
 
-import com.mag.auth.AuthenticationRequest;
-import com.mag.auth.AuthenticationResponse;
-import com.mag.auth.RegisterRequest;
+import com.mag.authentication.AuthenticationRequest;
+import com.mag.authentication.AuthenticationResponse;
+import com.mag.authentication.RegisterRequest;
 import com.mag.config.JwtService;
 import com.mag.user.RoleEnum;
 import com.mag.user.UserEntity;
