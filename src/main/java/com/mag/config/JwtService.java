@@ -23,7 +23,7 @@ public class JwtService {
     @Value(value = "${auth.secret-key}")
     private String secretKey;
 
-    public String extractUserName(String token) {
+    public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
@@ -46,8 +46,8 @@ public class JwtService {
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
-        final String userName = extractUserName(token);
-        return (userName.equals(userDetails.getUsername())) && Boolean.FALSE.equals(isTokenExpired(token));
+        final String username = extractUsername(token);
+        return (username.equals(userDetails.getUsername())) && Boolean.FALSE.equals(isTokenExpired(token));
     }
 
     private Boolean isTokenExpired(String token) {
