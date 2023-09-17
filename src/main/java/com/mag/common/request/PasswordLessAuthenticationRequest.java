@@ -1,4 +1,4 @@
-package com.mag.authentication;
+package com.mag.common.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,11 +7,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationRequest {
+@AllArgsConstructor
+public class PasswordLessAuthenticationRequest {
 
     private String email;
-    private String password;
+
+    private String code;
 
 }

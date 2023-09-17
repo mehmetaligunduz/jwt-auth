@@ -1,5 +1,10 @@
-package com.mag.authentication;
+package com.mag.resource;
 
+import com.mag.common.request.AuthenticationRequest;
+import com.mag.common.response.AuthenticationResponse;
+import com.mag.common.request.RegisterRequest;
+import com.mag.common.request.PasswordLessAuthenticationRequest;
+import com.mag.common.request.PreAuthenticationRequest;
 import com.mag.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +28,16 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest request) {
         return ResponseEntity.ok(authenticationService.login(request));
+    }
 
+    @PostMapping("/pre-login")
+    public ResponseEntity<Boolean> preLogin(@RequestBody PreAuthenticationRequest request) {
+        return ResponseEntity.ok(authenticationService.passwordLessLogin(request));
+    }
+
+    @PostMapping("/password-less-login")
+    public ResponseEntity<AuthenticationResponse> passwordLessLogin(@RequestBody PasswordLessAuthenticationRequest request) {
+        return ResponseEntity.ok(authenticationService.passwordLessLoginVerifying(request));
     }
 
 }
