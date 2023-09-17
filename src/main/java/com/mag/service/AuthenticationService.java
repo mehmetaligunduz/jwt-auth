@@ -106,7 +106,7 @@ public class AuthenticationService {
 
     public AuthenticationResponse passwordLessLoginVerifying(PasswordLessAuthenticationRequest request) {
 
-        Optional<UserEntity> user = userRepository.findByEmail(request.getEmail());
+        Optional<UserEntity> user = userRepository.findByEmail(request.getOwner());
 
         if (Boolean.FALSE.equals(user.isPresent())) {
             return new AuthenticationResponse(null);

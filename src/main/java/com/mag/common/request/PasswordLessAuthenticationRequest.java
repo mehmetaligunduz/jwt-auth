@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PasswordLessAuthenticationRequest {
 
-    private String email;
+    private String owner;
 
     private String code;
 
