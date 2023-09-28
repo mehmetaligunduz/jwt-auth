@@ -6,7 +6,6 @@ import com.mag.common.request.MessageRequest;
 import com.mag.common.request.PasswordLessAuthenticationRequest;
 import com.mag.common.request.RegisterRequest;
 import com.mag.common.response.AuthenticationResponse;
-import com.mag.config.JwtService;
 import com.mag.user.RoleEnum;
 import com.mag.user.UserEntity;
 import com.mag.user.UserRepository;

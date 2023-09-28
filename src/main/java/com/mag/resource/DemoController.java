@@ -1,4 +1,4 @@
-package com.mag.demo;
+package com.mag.resource;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

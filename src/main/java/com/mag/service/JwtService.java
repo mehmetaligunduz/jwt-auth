@@ -1,4 +1,4 @@
-package com.mag.config;
+package com.mag.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
