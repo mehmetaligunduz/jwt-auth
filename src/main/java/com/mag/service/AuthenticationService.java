@@ -2,7 +2,6 @@ package com.mag.service;
 
 import com.mag.common.request.PreAuthenticationRequest;
 import com.mag.common.request.AuthenticationRequest;
-import com.mag.common.request.MessageRequest;
 import com.mag.common.request.PasswordLessAuthenticationRequest;
 import com.mag.common.request.RegisterRequest;
 import com.mag.common.response.AuthenticationResponse;
@@ -42,9 +41,9 @@ public class AuthenticationService {
 
     public static final String OTP_VERIFY_SERVICE_URL = "http://localhost:8080/otp-service/v1/verify";
 
-    public static final String MQ_PUBLISH_URL = "http://localhost:8082/mq-service/publish";
 
     public AuthenticationResponse register(RegisterRequest request) {
+
         final UserEntity user = UserEntity
                 .builder()
                 .firstName(request.getFirstname())
@@ -60,19 +59,23 @@ public class AuthenticationService {
         final var token = jwtService.generateToken(user);
 
         return new AuthenticationResponse(token);
+
     }
 
     public AuthenticationResponse login(AuthenticationRequest request) {
+
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
                         request.getPassword()
                 )
         );
+
         final var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
         final var token = jwtService.generateToken(user);
 
         return new AuthenticationResponse(token);
+
     }
 
     public Boolean passwordLessLogin(PreAuthenticationRequest request) {
@@ -83,24 +86,15 @@ public class AuthenticationService {
             return Boolean.FALSE;
         }
 
-        String code = webClientBuilder.build()
+        webClientBuilder.build()
                 .post()
                 .uri(OTP_SERVICE_URL + user.get().getPhone())
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
 
-        webClientBuilder.build()
-                .post()
-                .uri(MQ_PUBLISH_URL)
-                .body(BodyInserters.fromValue(new MessageRequest(code, user.get().getPhone())))
-                .retrieve()
-                .bodyToMono(Void.class)
-                .block();
-
-        logger.info(code);
-
         return true;
+
     }
 
     public AuthenticationResponse passwordLessLoginVerifying(PasswordLessAuthenticationRequest request) {
@@ -126,5 +120,6 @@ public class AuthenticationService {
 
         final var token = jwtService.generateToken(user.get());
         return new AuthenticationResponse(token);
+        
     }
 }
